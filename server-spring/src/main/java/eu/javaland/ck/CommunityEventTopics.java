@@ -18,7 +18,7 @@ package eu.javaland.ck;
 
 import dev.rico.server.remoting.event.Topic;
 
-public interface ToDoEventTopics {
+public interface CommunityEventTopics {
 
     Topic<String> ITEM_MARK_CHANGED = Topic.create("item_mark_changed");
 

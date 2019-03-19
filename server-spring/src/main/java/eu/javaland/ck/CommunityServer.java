@@ -22,9 +22,9 @@ import org.springframework.boot.SpringApplication;
 
 @RicoApplication
 @EnableRemoting
-public class ToDoServer {
+public class CommunityServer {
 
     public static void main(String... args) {
-        SpringApplication.run(ToDoServer.class, args);
+        SpringApplication.run(CommunityServer.class, args);
     }
 }
