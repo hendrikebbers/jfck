@@ -50,19 +50,17 @@ public class TeamsController {
 
     private void update() {
         if(Objects.equals(currentTeam, TeamConstants.BUILD_TOOLS)) {
-            model.setTitle("Buildtools");
-            model.setValueOneTitle("Gradle");
-            model.setValueTwoTitle("Maven");
-        }
-        if(Objects.equals(currentTeam, TeamConstants.ENTERPRISE)) {
-            model.setTitle("Enterprise Frameworks");
-            model.setValueOneTitle("Jakarta EE");
-            model.setValueTwoTitle("Spring");
-        }
-        if(Objects.equals(currentTeam, TeamConstants.IDES)) {
-            model.setTitle("Buildtools");
-            model.setValueOneTitle("Eclipse");
-            model.setValueTwoTitle("Netbeans");
+            model.titleProperty().set("Buildtools");
+            model.valueOneTitleProperty().set("Gradle");
+            model.valueTwoTitleProperty().set("Maven");
+        }else if(Objects.equals(currentTeam, TeamConstants.ENTERPRISE)) {
+            model.titleProperty().set("Enterprise Frameworks");
+            model.valueOneTitleProperty().set("Jakarta EE");
+            model.valueTwoTitleProperty().set("Spring");
+        }else if(Objects.equals(currentTeam, TeamConstants.IDES)) {
+            model.titleProperty().set("Buildtools");
+            model.valueOneTitleProperty().set("Eclipse");
+            model.valueTwoTitleProperty().set("Netbeans");
         }
 
         AtomicInteger countA = new AtomicInteger();
@@ -82,8 +80,8 @@ public class TeamsController {
         final double aPercantage = countA.doubleValue() / sum;
         final double bPercantage = countB.doubleValue() / sum;
 
-        model.setValueOne(aPercantage);
-        model.setValueTwo(bPercantage);
+        model.valueTwoProperty().set(aPercantage);
+        model.valueTwoProperty().set(bPercantage);
     }
 
     private boolean isCorrect(final Vote vote) {
