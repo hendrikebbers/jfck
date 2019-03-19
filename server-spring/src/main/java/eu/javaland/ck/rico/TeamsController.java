@@ -43,6 +43,17 @@ public class TeamsController {
 
     private final Gson gson = new Gson();
 
+    private final JsonElement questionsElement;
+
+    public TeamsController() {
+        try {
+            final JsonParser parser = new JsonParser();
+            questionsElement = parser.parse(new FileReader(TeamsController.class.getResource("questions.json").getFile()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @PostConstruct
     public void init() {
         eventBus.subscribe(CommunityEventTopics.UPDATE, e -> update());
@@ -77,20 +88,24 @@ public class TeamsController {
             }
         });
         final int sum = countA.intValue() + countB.intValue();
-        final double aPercantage = countA.doubleValue() / sum;
-        final double bPercantage = countB.doubleValue() / sum;
+        if(sum > 0) {
+            final double aPercantage = countA.doubleValue() / sum;
+            final double bPercantage = countB.doubleValue() / sum;
 
-        model.valueOneProperty().set(aPercantage);
-        model.valueTwoProperty().set(bPercantage);
+            System.out.println("COUNT: " + sum + " | A: " + countA.intValue() + " B: " + countB.intValue());
 
+            model.valueOneProperty().set(aPercantage);
+            model.valueTwoProperty().set(bPercantage);
+        } else {
+            model.valueOneProperty().set(0.0);
+            model.valueTwoProperty().set(0.0);
+        }
         model.showNamesProperty().set(Database.showNames);
     }
 
     private boolean isCorrect(final Vote vote) {
         try {
-            JsonParser parser = new JsonParser();
-            final JsonElement element = parser.parse(new FileReader(TeamsController.class.getResource("questions.json").getFile()));
-            final JsonElement questionElement = element.getAsJsonArray().get(vote.getQuestionId());
+            final JsonElement questionElement = questionsElement.getAsJsonArray().get(vote.getQuestionId());
             final int answerIndex = questionElement.getAsJsonObject().get("solution").getAsInt();
             return vote.getQuestionAnswer() == answerIndex;
         } catch (Exception e) {
