@@ -17,13 +17,9 @@ package eu.javaland.ck;
 
 
 import dev.rico.server.remoting.event.Topic;
+import eu.javaland.ck.models.Vote;
 
 public interface CommunityEventTopics {
 
-    Topic<String> ITEM_MARK_CHANGED = Topic.create("item_mark_changed");
-
-    Topic<String> ITEM_ADDED = Topic.create("item_added");
-
-    Topic<String> ITEM_REMOVED = Topic.create("item_removed");
-
+    Topic<Vote> UPDATE = Topic.create("update");
 }
