@@ -32,7 +32,7 @@ public class TeamViewController extends AbstractFXMLViewController<TeamsModel> {
     private final String teamName;
 
     public TeamViewController(final ClientContext clientContext, final String teamName) {
-        super(clientContext, TEAM_CONTROLLER, TeamViewController.class.getResource("view.fxml"));
+        super(clientContext, TEAM_CONTROLLER, TeamViewController.class.getResource("teams.fxml"));
         this.teamName = teamName;
     }
 
