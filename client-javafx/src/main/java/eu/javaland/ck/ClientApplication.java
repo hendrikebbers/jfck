@@ -11,6 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static eu.javaland.ck.TeamConstants.BUILD_TOOLS;
+import static eu.javaland.ck.TeamConstants.ENTERPRISE;
+import static eu.javaland.ck.TeamConstants.IDES;
 
 public class ClientApplication extends AbstractRemotingApplication {
 
@@ -20,8 +22,8 @@ public class ClientApplication extends AbstractRemotingApplication {
 
     protected void start(Stage primaryStage, ClientContext clientContext) throws Exception {
         final Button buildToolsButton = createTeamButton(clientContext, BUILD_TOOLS, "Build tools");
-        final Button enterpriseButton = createTeamButton(clientContext, BUILD_TOOLS, "Build tools");
-        final Button ideButton = createTeamButton(clientContext, BUILD_TOOLS, "Build tools");
+        final Button enterpriseButton = createTeamButton(clientContext, IDES, "IDEs");
+        final Button ideButton = createTeamButton(clientContext, ENTERPRISE, "Enterprise frameworks");
         final HBox box = new HBox(buildToolsButton, enterpriseButton, ideButton);
 
         primaryStage.setScene(new Scene(box));
