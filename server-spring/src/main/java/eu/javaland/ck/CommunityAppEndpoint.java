@@ -16,7 +16,7 @@ import static eu.javaland.ck.Database.users;
 import static eu.javaland.ck.Database.votes;
 
 @SingletonScope
-@RestController("/api")
+@RestController
 public class CommunityAppEndpoint {
 
     private final Gson gson = new Gson();
