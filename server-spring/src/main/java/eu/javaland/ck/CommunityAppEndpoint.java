@@ -42,14 +42,13 @@ public class CommunityAppEndpoint {
     public void newVote(Vote vote) {
         UUID uuid = UUID.randomUUID();
         vote.setId(uuid.toString());
-
-        eventBus.publish(CommunityEventTopics.UPDATE, vote);
-
         votes.put(uuid.toString(), gson.toJson(vote));
+        eventBus.publish(CommunityEventTopics.UPDATE, null);
     }
 
     @DeleteMapping("/votes")
     public void resetVotes() {
         votes.clear();
+        eventBus.publish(CommunityEventTopics.UPDATE, null);
     }
 }

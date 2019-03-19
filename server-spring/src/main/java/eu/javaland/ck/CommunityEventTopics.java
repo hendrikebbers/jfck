@@ -21,5 +21,5 @@ import eu.javaland.ck.models.Vote;
 
 public interface CommunityEventTopics {
 
-    Topic<Vote> UPDATE = Topic.create("update");
+    Topic<Boolean> UPDATE = Topic.create("update");
 }
