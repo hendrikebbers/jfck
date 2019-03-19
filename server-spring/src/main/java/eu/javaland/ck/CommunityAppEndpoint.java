@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class CommunityAppEndpoint {
     }
 
     @PutMapping("/users")
-    public User newUser(User user) {
+    public User newUser(@RequestBody User user) {
         UUID uuid = UUID.randomUUID();
         user.setId(uuid.toString());
 
@@ -52,7 +53,7 @@ public class CommunityAppEndpoint {
     }
 
     @PutMapping("/votes")
-    public void newVote(Vote vote) {
+    public void newVote(@RequestBody Vote vote) {
         UUID uuid = UUID.randomUUID();
         vote.setId(uuid.toString());
         votes.put(uuid.toString(), gson.toJson(vote));
