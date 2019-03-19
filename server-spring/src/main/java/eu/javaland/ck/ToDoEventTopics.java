@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.rico.samples.todo;
+package eu.javaland.ck;
 
-public interface TodoAppConstants {
 
-    String ADD_ACTION = "add";
+import dev.rico.server.remoting.event.Topic;
 
-    String REMOVE_ACTION = "remove";
+public interface ToDoEventTopics {
 
-    String CHANGE_ACTION = "change";
+    Topic<String> ITEM_MARK_CHANGED = Topic.create("item_mark_changed");
 
-    String TODO_CONTROLLER_NAME = "ToDoController";
+    Topic<String> ITEM_ADDED = Topic.create("item_added");
 
-    String ITEM_PARAM = "item";
+    Topic<String> ITEM_REMOVED = Topic.create("item_removed");
+
 }
