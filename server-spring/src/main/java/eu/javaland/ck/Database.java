@@ -9,7 +9,7 @@ public class Database {
     public static final HTreeMap<String, String> users;
     public static final HTreeMap<String, String> votes;
 
-    public static boolean showNames;
+    public static boolean showNames = true;
 
     static {
         DB db = DBMaker.fileDB("./communityserver.mapdb").fileChannelEnable().closeOnJvmShutdown().make();
