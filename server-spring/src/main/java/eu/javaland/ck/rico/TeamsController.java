@@ -80,8 +80,10 @@ public class TeamsController {
         final double aPercantage = countA.doubleValue() / sum;
         final double bPercantage = countB.doubleValue() / sum;
 
-        model.valueTwoProperty().set(aPercantage);
+        model.valueOneProperty().set(aPercantage);
         model.valueTwoProperty().set(bPercantage);
+
+        model.showNamesProperty().set(Database.showNames);
     }
 
     private boolean isCorrect(final Vote vote) {

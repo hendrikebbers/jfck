@@ -45,6 +45,9 @@ public class TeamViewController extends AbstractFXMLViewController<TeamsModel> {
         FXBinder.bind(valueTwoLabel.textProperty()).to(getModel().valueTwoTitleProperty());
         getModel().valueTwoProperty().onChanged(e -> valueTwoProgress.setProgress(e.getNewValue()));
 
+        FXBinder.bind(valueOneLabel.visibleProperty()).to(getModel().showNamesProperty());
+        FXBinder.bind(valueTwoLabel.visibleProperty()).to(getModel().showNamesProperty());
+
         invoke(SET_TEAM_ACTION, new Param(TEAM, teamName));
     }
 }

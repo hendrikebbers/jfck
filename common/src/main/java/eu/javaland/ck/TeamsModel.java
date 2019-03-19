@@ -16,6 +16,12 @@ public class TeamsModel {
 
     private Property<Double> valueTwo;
 
+    private Property<Boolean> showNames;
+
+    public Property<Boolean> showNamesProperty() {
+        return showNames;
+    }
+
     public Property<String> titleProperty() {
         return title;
     }

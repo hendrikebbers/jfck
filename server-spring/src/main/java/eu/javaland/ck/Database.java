@@ -9,6 +9,8 @@ public class Database {
     public static final HTreeMap<String, String> users;
     public static final HTreeMap<String, String> votes;
 
+    public static boolean showNames;
+
     static {
         DB db = DBMaker.fileDB("./communityserver.mapdb").fileChannelEnable().closeOnJvmShutdown().make();
         users = db.hashMap("users", Serializer.STRING, Serializer.STRING).createOrOpen();
