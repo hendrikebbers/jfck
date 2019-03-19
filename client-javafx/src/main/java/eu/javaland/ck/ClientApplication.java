@@ -24,7 +24,11 @@ public class ClientApplication extends AbstractRemotingApplication {
         final Button buildToolsButton = createTeamButton(clientContext, BUILD_TOOLS, "Build tools");
         final Button enterpriseButton = createTeamButton(clientContext, IDES, "IDEs");
         final Button ideButton = createTeamButton(clientContext, ENTERPRISE, "Enterprise frameworks");
-        final HBox box = new HBox(buildToolsButton, enterpriseButton, ideButton);
+
+        final Button question1Button = createQuestionButton(clientContext, 0, "1");
+        final Button question2Button = createQuestionButton(clientContext, 1, "2");
+
+        final HBox box = new HBox(buildToolsButton, enterpriseButton, ideButton, question1Button, question2Button);
 
         primaryStage.setScene(new Scene(box));
         primaryStage.show();
@@ -34,6 +38,17 @@ public class ClientApplication extends AbstractRemotingApplication {
         final Button button = new Button(buttonText);
         button.setOnAction(e -> {
             final TeamViewController teamViewController = new TeamViewController(clientContext, teamId);
+            final Stage stage = new Stage();
+            stage.setScene(new Scene(teamViewController.getParent()));
+            stage.show();
+        });
+        return button;
+    }
+
+    private Button createQuestionButton(final ClientContext clientContext, final int questionId, final String buttonText) {
+        final Button button = new Button(buttonText);
+        button.setOnAction(e -> {
+            final QuestionViewController teamViewController = new QuestionViewController(clientContext, questionId);
             final Stage stage = new Stage();
             stage.setScene(new Scene(teamViewController.getParent()));
             stage.show();

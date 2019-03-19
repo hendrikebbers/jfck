@@ -40,9 +40,20 @@ public class QuestionsController {
     @Autowired
     private RemotingEventBus eventBus;
 
-    private int questionId;
+    private int questionId = -1;
 
     private final Gson gson = new Gson();
+
+    private final JsonElement questionsElement;
+
+    public QuestionsController() {
+        try {
+            final JsonParser parser = new JsonParser();
+            questionsElement = parser.parse(new FileReader(TeamsController.class.getResource("questions.json").getFile()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @PostConstruct
     public void init() {
@@ -50,9 +61,77 @@ public class QuestionsController {
     }
 
     private void update() {
+        if(questionId >= 0) {
+            final JsonElement questionElement = questionsElement.getAsJsonArray().get(questionId);
+            final String q = questionElement.getAsJsonObject().get("question").getAsString();
+            model.titleProperty().set(q);
 
+            final String a1 = questionElement.getAsJsonObject().get("options").getAsJsonArray().get(0).getAsString();
+            final String a2 = questionElement.getAsJsonObject().get("options").getAsJsonArray().get(1).getAsString();
+            final String a3 = questionElement.getAsJsonObject().get("options").getAsJsonArray().get(2).getAsString();
+            final String a4 = questionElement.getAsJsonObject().get("options").getAsJsonArray().get(3).getAsString();
+
+            model.valueOneTitleProperty().set(a1);
+            model.valueTwoTitleProperty().set(a2);
+            model.valueThreeTitleProperty().set(a3);
+            model.valueFourTitleProperty().set(a4);
+
+            AtomicInteger countA = new AtomicInteger();
+            AtomicInteger countB = new AtomicInteger();
+            AtomicInteger countC = new AtomicInteger();
+            AtomicInteger countD = new AtomicInteger();
+
+            Database.votes.forEach((k, v) -> {
+                final Vote vote = gson.fromJson(v, Vote.class);
+                if(vote.getQuestionAnswer() == 0) {
+                    countA.incrementAndGet();
+                }
+                if(vote.getQuestionAnswer() == 1) {
+                    countB.incrementAndGet();
+                }
+                if(vote.getQuestionAnswer() == 2) {
+                    countC.incrementAndGet();
+                }
+                if(vote.getQuestionAnswer() == 3) {
+                    countD.incrementAndGet();
+                }
+
+                final int sum = countA.intValue() + countB.intValue() + countC.intValue() + countD.intValue();
+                if(sum > 0) {
+                    final double aPercantage = countA.doubleValue() / sum;
+                    final double bPercantage = countB.doubleValue() / sum;
+                    final double cPercantage = countC.doubleValue() / sum;
+                    final double dPercantage = countD.doubleValue() / sum;
+
+                    model.valueOneProperty().set(aPercantage);
+                    model.valueTwoProperty().set(bPercantage);
+                    model.valueThreeProperty().set(cPercantage);
+                    model.valueFourProperty().set(dPercantage);
+                } else {
+                    model.valueOneProperty().set(0.0);
+                    model.valueTwoProperty().set(0.0);
+                    model.valueThreeProperty().set(0.0);
+                    model.valueFourProperty().set(0.0);
+                }
+            });
+        } else {
+            model.titleProperty().set("");
+            model.valueOneTitleProperty().set("");
+            model.valueTwoTitleProperty().set("");
+            model.valueThreeTitleProperty().set("");
+            model.valueFourTitleProperty().set("");
+        }
+        model.showNamesProperty().set(Database.showNames);
     }
 
+    private boolean isAnswer(final Vote vote, final int answerNumber) {
+        try {
+            final JsonElement questionElement = questionsElement.getAsJsonArray().get(vote.getQuestionId());
+            return vote.getQuestionAnswer() == answerNumber;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @RemotingAction(SET_QUESTION_ACTION)
     public void setTeam(@Param(QUESTION) int questionId) {
