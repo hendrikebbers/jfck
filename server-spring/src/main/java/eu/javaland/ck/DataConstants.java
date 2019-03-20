@@ -10,8 +10,8 @@ public interface DataConstants {
 
     int ED_ID = 4;
 
-    int MICHAEL_ID = 5;
+    int MICHAEL_ID = 6;
 
-    int GEAL_ID = 6;
+    int GEAL_ID = 5;
 
 }
