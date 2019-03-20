@@ -36,6 +36,11 @@ public class TeamViewController extends AbstractFXMLViewController<TeamsModel> {
         this.teamName = teamName;
     }
 
+    @Override
+    protected void onInitializationException(Throwable t) {
+        t.printStackTrace();
+    }
+
     protected void init() {
         FXBinder.bind(titleLabel.textProperty()).to(getModel().titleProperty());
 

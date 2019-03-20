@@ -8,12 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
-import static eu.javaland.ck.TeamConstants.QUESTION;
-import static eu.javaland.ck.TeamConstants.QUESTION_CONTROLLER;
-import static eu.javaland.ck.TeamConstants.SET_QUESTION_ACTION;
-import static eu.javaland.ck.TeamConstants.SET_TEAM_ACTION;
-import static eu.javaland.ck.TeamConstants.TEAM;
-import static eu.javaland.ck.TeamConstants.TEAM_CONTROLLER;
+import static eu.javaland.ck.TeamConstants.*;
 
 public class QuestionViewController extends AbstractFXMLViewController<QuestionsModel> {
 
@@ -51,6 +46,11 @@ public class QuestionViewController extends AbstractFXMLViewController<Questions
         this.questionID = questionID;
     }
 
+    @Override
+    protected void onInitializationException(Throwable t) {
+        t.printStackTrace();
+    }
+
     protected void init() {
         FXBinder.bind(titleLabel.textProperty()).to(getModel().titleProperty());
 
@@ -72,5 +72,8 @@ public class QuestionViewController extends AbstractFXMLViewController<Questions
         FXBinder.bind(valueFourLabel.visibleProperty()).to(getModel().showNamesProperty());
 
         invoke(SET_QUESTION_ACTION, new Param(QUESTION, questionID));
+
+
+        titleLabel.setOnMouseClicked(e -> invoke(NEXT));
     }
 }
