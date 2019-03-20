@@ -47,6 +47,8 @@ public class QuestionsController {
     @PostConstruct
     public void init() {
         eventBus.subscribe(CommunityEventTopics.UPDATE, e -> update());
+        eventBus.subscribe(CommunityEventTopics.NEXT, e -> next());
+        eventBus.subscribe(CommunityEventTopics.PREV, e -> prev());
     }
 
     private void update() {

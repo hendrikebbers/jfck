@@ -22,4 +22,6 @@ import eu.javaland.ck.models.Vote;
 public interface CommunityEventTopics {
 
     Topic<Boolean> UPDATE = Topic.create("update");
+    Topic<Boolean> NEXT = Topic.create("next");
+    Topic<Boolean> PREV = Topic.create("prev");
 }

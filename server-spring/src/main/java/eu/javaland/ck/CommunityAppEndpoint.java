@@ -5,7 +5,6 @@ import dev.rico.server.SingletonScope;
 import dev.rico.server.remoting.event.RemotingEventBus;
 import eu.javaland.ck.models.User;
 import eu.javaland.ck.models.Vote;
-import eu.javaland.ck.rico.QuestionsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,7 @@ public class CommunityAppEndpoint {
 
     @Autowired
     private RemotingEventBus eventBus;
-    
+
     public CommunityAppEndpoint() {
     }
 
@@ -70,11 +69,11 @@ public class CommunityAppEndpoint {
 
     @PostMapping("/next")
     public void next() {
-        questionsController.next();
+        eventBus.publish(CommunityEventTopics.NEXT, true);
     }
 
-    @PostMapping("/questions/{questionId}")
-    public void questions(@PathParam("questionId") int questionId) {
-        questionsController.setTeam(questionId);
+    @PostMapping("/prev")
+    public void questions() {
+        eventBus.publish(CommunityEventTopics.PREV, true);
     }
 }

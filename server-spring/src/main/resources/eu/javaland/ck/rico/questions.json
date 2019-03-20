@@ -1,73 +1,134 @@
 [
-    {
-        "question": "Was macht die JavaLand so besonders?",
-        "options": [
-            "Besucher", "Java im Namen", "Aussteller", "Community Keynote"
-        ],
-        "solution": 3
-    },
-    {
-        "question": "Was war Javas originaler Name?",
-        "options": ["Oak", "Duke", "Greentalk", "Spring"],
-        "solution": 2
-    }, {
-        "question": "er ist der Vater von Java?",
-        "options": ["Mark Reinhold", "Mario-Leander Reimer"
-                    , "Toni Epple", "Trisha Gee"],
-        "solution": 1
-    }, {
-        "question": "Was ist kein Java Keyword?",
-        "options": ["volatile", "const", "goto", "var"],
-        "solution": 3
-    }, {
-        "question": "Was ist Duke?",
-        "options": ["Weißheitszahn", "Pinguin", "Software Agent", "Mouse Pointer"],
-        "solution": 2
-    }, {
-        "question": "Wofür wurde Java eigentlich entwickelt?",
-        "options": ["Appliances", "Applets", "Set-Top Boxes", "Feature Phone"],
-        "solution": 2
-    }, {
-        "question": "Wer besitzt das JavaScript Trademark?",
-        "options": ["Microsoft", "Oracle", "Mozilla Foundation", "Node.js Foundation"],
-        "solution": 1
-    }, {
-        "question": "Was könnte Java ersetzen?",
-        "options": ["JavaScript", "Nichts", "PHP", "Scotlin"],
-        "solution": 1
-    }, {
-        "question": "Welche Java Version wird im September 2025 freigegeben?",
-        "options": ["42", "23", "5.1", "1024"],
-        "solution": 1
-    }, {
-        "question": "Einmal im Leben von Java wurde etwas “Undeprecated”, was war das?",
-        "options": ["Vector Class, Java Core", "getParameter Method, Servlet SDK",
-            "Corba, Java Core", "@EJB Annotation, Java Enterprise Edition"],
-        "solution": 1
-    }, {
-        "question": "Welche dieser Firmen verkauft keinen Java Support?",
-        "options": ["Bellsoft", "Amazon", "Azul", "Oracle"],
-        "solution": 1
-    }, {
-        "question": "Welche Java Version gibt es nicht?",
-        "options": ["Java 1.2",
-            "Java 5",
-            "Java 12",
-            "Java 9"]
-        ,
-        "solution": 1
-    }, {
-        "question": "Wann wurde diese Community Keynote vorbereitet?",
-        "options": ["Noch nicht fertig", "Vor 24 Stunden", "Vor 42 Tagen", "Während der letzten Community Keynote"],
-        "solution": 0
-    }, {
-        "question": "Welches ist keine JVM?",
-        "options": [
-            "IKVM",
-            "PumpkinSpiceLatteVM",
-            "BCK2BRWSR",
-            "HotSpot"
-        ]
-    }
-
+  {
+    "id": 0,
+    "question": "Was macht die JavaLand so besonders?",
+    "options": [
+      "Besucher",
+      "Java im Namen",
+      "Aussteller",
+      "Community Keynote"
+    ],
+    "solution": 3
+  },
+  {
+    "id": 1,
+    "question": "Was war Javas originaler Name?",
+    "options": [
+      "Oak",
+      "Duke",
+      "Greentalk",
+      "Spring"
+    ],
+    "solution": 2
+  },
+  {
+    "id": 2,
+    "question": "Was ist kein Java Keyword?",
+    "options": [
+      "volatile",
+      "const",
+      "goto",
+      "var"
+    ],
+    "solution": 3
+  },
+  {
+    "id": 3,
+    "question": "Wer ist der Vater von Java?",
+    "options": [
+      "Mark Reinhold",
+      "Mario-Leander Reimer",
+      "Toni Epple",
+      "Trisha Gee"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 4,
+    "question": "Was ist Duke?",
+    "options": [
+      "Weißheitszahn",
+      "Pinguin",
+      "Software Agent",
+      "Mouse Pointer"
+    ],
+    "solution": 2
+  },
+  {
+    "id": 5,
+    "question": "Wofür wurde Java eigentlich entwickelt?",
+    "options": [
+      "Appliances",
+      "Applets",
+      "Set-Top Boxes",
+      "Feature Phone"
+    ],
+    "solution": 2
+  },
+  {
+    "id": 6,
+    "question": "Wer besitzt das JavaScript Trademark?",
+    "options": [
+      "Microsoft",
+      "Oracle",
+      "Mozilla Foundation",
+      "Node.js Foundation"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 7,
+    "question": "Was könnte Java ersetzen?",
+    "options": [
+      "JavaScript",
+      "Nichts",
+      "PHP",
+      "Scotlin"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 8,
+    "question": "Welche Java Version wird im September 2025 freigegeben?",
+    "options": [
+      "42",
+      "23",
+      "5.1",
+      "1024"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 9,
+    "question": "Einmal im Leben von Java wurde etwas “Undeprecated”, was war das?",
+    "options": [
+      "Vector Class, Java Core",
+      "getParameter Method, Servlet SDK",
+      "Corba, Java Core",
+      "@EJB Annotation, Java Enterprise Edition"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 10,
+    "question": "Welche Java Version gibt es nicht?",
+    "options": [
+      "Java 1.2",
+      "Java 5",
+      "Java 12",
+      "Java 9"
+    ],
+    "solution": 1
+  },
+  {
+    "id": 11,
+    "question": "Welches ist keine JVM?",
+    "options": [
+      "IKVM",
+      "PumpkinSpiceLatteVM",
+      "BCK2BRWSR",
+      "HotSpot"
+    ],
+    "solution": 1
+  }
 ]
