@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link href="index.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="main">
+            <div class="Navbar">
+                <div class="Navbar__Link Navbar__Link-brand">
+                    <span class="logo-text">timber</span>
+                </div>
+                <div class="Navbar__Link">
+                    <i class="logo-icon fa fa-fire-alt"></i>
+                </div>
+                <div class="Navbar__Link">
+                    <!-- ko if: ( !quizRunning() && teamSelected()) -->  
+                    <a class="trainer-button" data-bind="click: startQuiz" >submit</a>
+                    <!-- /ko -->
+                    <!-- ko if: (quizRunning() || !teamSelected() )-->  
+                    <span data-bind="text: headerMessage"></span>
+                    <!-- /ko -->
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="trainer-card-stack">
+                    <!-- ko ifnot: registered -->
+                    <!-- ko template:{name: 'registrationForm', data: newProfile} -->             
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: (registered() && !quizRunning())  -->
+                    <!-- ko template:{name: 'profile', data: nextProfile} -->
+                    <!-- /ko -->
+                    <!-- ko template:{name: 'profile', data: activeProfile} -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: quizRunning -->
+                    <!-- ko template:{name: 'quiz', data: quiz} -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            
+            <div class="buttons-overview" data-bind="visible: !profileDetailsShowing()&&registered()&& !quizRunning()">
+                <!--            <a class="selection-button button-undo">
+                                <i class=" fas fa-undo"></i>
+                            </a>-->
+                <a class="selection-button button-nope" data-bind="click: swipeLeft">
+                    <i class=" fas fa-times"></i>
+                </a>
+                <a class="selection-button button-super" data-bind="click: swipeUp">
+                    <i class=" fas fa-star"></i>
+                </a>
+                <a class="selection-button button-like" data-bind="click: swipeRight">
+                    <i class=" fas fa-heart"></i>
+                </a>
+            </div>
+            
+            <div id="title" data-bind="visible: !hideSplash()">
+                <div><i class="loading-icon fa fa-fire-alt"></i>
+                </div>
+                <div><span data-bind="text: message"></span></div>
+                <div data-bind="click: start">Click to start</div>
+            </div> 
+            <div id="goodbye" data-bind="visible: gameOver">
+                <div><i class="loading-icon fa fa-fire-alt"></i>
+                </div>
+                <div>Thank you!</div>
+                <!--<div data-bind="click: start">Click to start</div>-->
+            </div> 
+
+        </div>
+        <!-- initialize bck2brwsr -->
+<script type="text/javascript" src="bck2brwsr.js"></script>
+<script>
+    var vm = bck2brwsr('Eppletinder.js');
+    var c = vm.loadClass('de.eppleton.tinder.BrowserMain');
+    c.invoke('main');
+</script>
+<!-- end of initialization -->
+        <script type="text/html" id="profile">
+            <div class="trainer-card-outer" data-bind="event: {webkitAnimationEnd: $root.newTop}, visible: visible">
+                <div class="trainer-card-wrapper" data-bind="css: {swipeLeft: animation()=='SWIPELEFT', swipeRight: animation()=='SWIPERIGHT', swipeUp: animation()=='SWIPEUP', 
+                        superliked: status()=='SUPERLIKED', liked: status()=='LIKED', noped: status()=='DISMISSED'
+                        , 'next-card' : $root.nextProfile()==$data}">
+                    <div class="trainer-card">
+                        <!--<div class="trainer-card-inner">-->
+                        <div class="profile-image-wrapper">
+                            <div class="scroll-wrapper">
+                                <img class="profile-image" alt="" data-bind="attr: {src: img}"/>
+                                <a class="selection-button close-details-button" data-bind="visible: $root.profileDetailsShowing, click: $root.hideDetails">
+                                    <i class="fa fa-arrow-down"></i>
+                                </a>
+                            </div>
+                            <div class="profile-image-overlay" data-bind="css: {invert: $root.inverted()},visible: !$root.profileDetailsShowing()">
+                                <div class="profile-overlay-top">
+                                    <div class="profile-header">
+                                        <span class="profile-name" data-bind="text:technology"></span>&nbsp;<span class="profile-age" data-bind="text:name">47</span>           
+                                    </div>
+                                    <div class="">
+                                        <i class="fas fa-suitcase"></i>
+                                        <span data-bind="text: affiliation"></span>
+                                    </div>
+                                </div>
+                                <i data-bind="click: $root.showDetails" class="profile-info-button fas fa-info-circle"></i>
+                            </div>
+                        </div>
+                        <div class="profile-details-wrapper" data-bind="visible: $root.profileDetailsShowing">
+                            <div class="profile-description">
+                                <div class="profile-header">
+                                    <span class="profile-name" data-bind="text: technology">Monaco</span>&nbsp;<span class="profile-age" data-bind="text: name"></span>           
+                                </div>
+                                <div class="profile-details">
+                                    <i class="fas fa-suitcase"></i>
+                                    <span data-bind="text: affiliation"></span>
+                                </div>
+                            </div>
+                            <div class="profile-description">
+                                <div class="profile-details" data-bind="text:quote"> 
+                                </div>
+                            </div>
+                            <div class="profile-description">
+                                <div class="profile-details" data-bind="text:description">
+                                </div>
+                            </div>
+
+                            <div class="profile-bottom-spacer">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="trainer-card-overlay" data-bind="visible: $root.profileDetailsShowing">
+                    <a class="selection-button button-nope" data-bind="click: $root.swipeLeft">
+                        <i class=" fas fa-times"></i>
+                    </a>
+                    <a class="selection-button button-super" data-bind="click: $root.swipeUp">
+                        <i class=" fas fa-star"></i>
+                    </a>
+                    <a class="selection-button button-like" data-bind="click: $root.swipeRight">
+                        <i class=" fas fa-heart"></i>
+                    </a>
+                </div>
+
+            </div>
+        </script>
+        <script id="quiz" type="text/html">       
+            <!-- <div class="score">Score:&nbsp;<span data-bind="text: scoreText"></span></div> -->
+            <!--<div>Score:&nbsp;<span data-bind="text: score"></span></div>-->
+            <!-- ko with: currentQuestion -->
+            <h1 data-bind="text: question">Question</h1>
+            <div class="quiz-questions">
+                <a class="trainer-button" data-bind="text:  options()[0], click: function(){$parent.answer(0)}" ></a>
+                <a class="trainer-button" data-bind="text:  options()[1], click: function(){$parent.answer(1)}" ></a>
+                <a class="trainer-button" data-bind="text:  options()[2], click: function(){$parent.answer(2)}" ></a>
+                <a class="trainer-button" data-bind="text:  options()[3], click: function(){$parent.answer(3)}" ></a>
+            </div>
+            <!-- /ko -->
+        </script>
+        <script id="registrationForm" type="text/html">
+            <h2>Bitte wähle Deinen Benutzernamen:</h2>
+            <form data-bind="event: {submit: $root.storeProfile}">
+                <div class="form-row"> 
+
+                    <input id="name" type="text" data-bind="textinput: name" required>
+                </div>
+                <div class="submitbutton">
+                    <button class="trainer-button" type="submit" >submit</button>
+                </div>
+            </form>
+        </script>
+    </body>
+</html>
