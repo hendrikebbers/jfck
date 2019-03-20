@@ -27,8 +27,31 @@ public class ClientApplication extends AbstractRemotingApplication {
 
         final Button question1Button = createQuestionButton(clientContext, 0, "1");
         final Button question2Button = createQuestionButton(clientContext, 1, "2");
+        final Button question3Button = createQuestionButton(clientContext, 2, "3");
+        final Button question4Button = createQuestionButton(clientContext, 3, "4");
+        final Button question5Button = createQuestionButton(clientContext, 4, "5");
+        final Button question6Button = createQuestionButton(clientContext, 5, "6");
+        final Button question7Button = createQuestionButton(clientContext, 6, "7");
+        final Button question8Button = createQuestionButton(clientContext, 7, "8");
+        final Button question9Button = createQuestionButton(clientContext, 8, "9");
+        final Button question10Button = createQuestionButton(clientContext, 9, "10");
+        final Button question11Button = createQuestionButton(clientContext, 10, "11");
+        final Button question12Button = createQuestionButton(clientContext, 11, "12");
 
-        final HBox box = new HBox(buildToolsButton, enterpriseButton, ideButton, question1Button, question2Button);
+
+        final HBox box = new HBox(buildToolsButton, enterpriseButton, ideButton,
+                question1Button,
+                question2Button,
+                question3Button,
+                question4Button,
+                question5Button,
+                question6Button,
+                question7Button,
+                question8Button,
+                question9Button,
+                question10Button,
+                question11Button,
+                question12Button                );
 
         primaryStage.setScene(new Scene(box));
         primaryStage.show();

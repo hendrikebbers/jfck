@@ -24,12 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static eu.javaland.ck.DataConstants.ANDREAS_ID;
 import static eu.javaland.ck.DataConstants.ED_ID;
 import static eu.javaland.ck.DataConstants.GEAL_ID;
-import static eu.javaland.ck.TeamConstants.QUESTION;
-import static eu.javaland.ck.TeamConstants.QUESTION_CONTROLLER;
-import static eu.javaland.ck.TeamConstants.SET_QUESTION_ACTION;
-import static eu.javaland.ck.TeamConstants.SET_TEAM_ACTION;
-import static eu.javaland.ck.TeamConstants.TEAM;
-import static eu.javaland.ck.TeamConstants.TEAM_CONTROLLER;
+import static eu.javaland.ck.TeamConstants.*;
 
 @RemotingController(QUESTION_CONTROLLER)
 public class QuestionsController {
@@ -83,37 +78,40 @@ public class QuestionsController {
 
             Database.votes.forEach((k, v) -> {
                 final Vote vote = gson.fromJson(v, Vote.class);
-                if(vote.getQuestionAnswer() == 0) {
-                    countA.incrementAndGet();
-                }
-                if(vote.getQuestionAnswer() == 1) {
-                    countB.incrementAndGet();
-                }
-                if(vote.getQuestionAnswer() == 2) {
-                    countC.incrementAndGet();
-                }
-                if(vote.getQuestionAnswer() == 3) {
-                    countD.incrementAndGet();
-                }
-
-                final int sum = countA.intValue() + countB.intValue() + countC.intValue() + countD.intValue();
-                if(sum > 0) {
-                    final double aPercantage = countA.doubleValue() / sum;
-                    final double bPercantage = countB.doubleValue() / sum;
-                    final double cPercantage = countC.doubleValue() / sum;
-                    final double dPercantage = countD.doubleValue() / sum;
-
-                    model.valueOneProperty().set(aPercantage);
-                    model.valueTwoProperty().set(bPercantage);
-                    model.valueThreeProperty().set(cPercantage);
-                    model.valueFourProperty().set(dPercantage);
-                } else {
-                    model.valueOneProperty().set(0.0);
-                    model.valueTwoProperty().set(0.0);
-                    model.valueThreeProperty().set(0.0);
-                    model.valueFourProperty().set(0.0);
+                if(vote.getQuestionId() == questionId) {
+                    if (vote.getQuestionAnswer() == 0) {
+                        countA.incrementAndGet();
+                    }
+                    if (vote.getQuestionAnswer() == 1) {
+                        countB.incrementAndGet();
+                    }
+                    if (vote.getQuestionAnswer() == 2) {
+                        countC.incrementAndGet();
+                    }
+                    if (vote.getQuestionAnswer() == 3) {
+                        countD.incrementAndGet();
+                    }
                 }
             });
+
+            final int sum = countA.intValue() + countB.intValue() + countC.intValue() + countD.intValue();
+            if(sum > 0) {
+                final double aPercantage = countA.doubleValue() / sum;
+                final double bPercantage = countB.doubleValue() / sum;
+                final double cPercantage = countC.doubleValue() / sum;
+                final double dPercantage = countD.doubleValue() / sum;
+
+                model.valueOneProperty().set(aPercantage);
+                model.valueTwoProperty().set(bPercantage);
+                model.valueThreeProperty().set(cPercantage);
+                model.valueFourProperty().set(dPercantage);
+            } else {
+                model.valueOneProperty().set(0.0);
+                model.valueTwoProperty().set(0.0);
+                model.valueThreeProperty().set(0.0);
+                model.valueFourProperty().set(0.0);
+            }
+
         } else {
             model.titleProperty().set("");
             model.valueOneTitleProperty().set("");
@@ -136,6 +134,18 @@ public class QuestionsController {
     @RemotingAction(SET_QUESTION_ACTION)
     public void setTeam(@Param(QUESTION) int questionId) {
         this.questionId = questionId;
+        update();
+    }
+
+    @RemotingAction(PREV)
+    public void prev() {
+        this.questionId--;
+        update();
+    }
+
+    @RemotingAction(NEXT)
+    public void next() {
+        this.questionId++;
         update();
     }
 
