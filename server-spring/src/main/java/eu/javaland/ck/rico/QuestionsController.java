@@ -11,25 +11,16 @@ import dev.rico.server.remoting.event.RemotingEventBus;
 import eu.javaland.ck.CommunityEventTopics;
 import eu.javaland.ck.Database;
 import eu.javaland.ck.QuestionsModel;
-import eu.javaland.ck.TeamConstants;
-import eu.javaland.ck.TeamsModel;
 import eu.javaland.ck.models.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static eu.javaland.ck.DataConstants.ANDREAS_ID;
-import static eu.javaland.ck.DataConstants.ED_ID;
-import static eu.javaland.ck.DataConstants.GEAL_ID;
 import static eu.javaland.ck.TeamConstants.QUESTION;
 import static eu.javaland.ck.TeamConstants.QUESTION_CONTROLLER;
 import static eu.javaland.ck.TeamConstants.SET_QUESTION_ACTION;
-import static eu.javaland.ck.TeamConstants.SET_TEAM_ACTION;
-import static eu.javaland.ck.TeamConstants.TEAM;
-import static eu.javaland.ck.TeamConstants.TEAM_CONTROLLER;
 
 @RemotingController(QUESTION_CONTROLLER)
 public class QuestionsController {

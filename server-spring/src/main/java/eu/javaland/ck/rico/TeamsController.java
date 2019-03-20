@@ -9,7 +9,6 @@ import dev.rico.server.remoting.RemotingController;
 import dev.rico.server.remoting.RemotingModel;
 import dev.rico.server.remoting.event.RemotingEventBus;
 import eu.javaland.ck.CommunityEventTopics;
-import eu.javaland.ck.DataConstants;
 import eu.javaland.ck.Database;
 import eu.javaland.ck.TeamConstants;
 import eu.javaland.ck.TeamsModel;
@@ -18,14 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static eu.javaland.ck.DataConstants.ANDREAS_ID;
+import static eu.javaland.ck.DataConstants.ANDRES_ID;
 import static eu.javaland.ck.DataConstants.ED_ID;
 import static eu.javaland.ck.DataConstants.GEAL_ID;
+import static eu.javaland.ck.DataConstants.GUNNAR_ID;
+import static eu.javaland.ck.DataConstants.MICHAEL_ID;
+import static eu.javaland.ck.DataConstants.SIMONS_ID;
 import static eu.javaland.ck.TeamConstants.SET_TEAM_ACTION;
 import static eu.javaland.ck.TeamConstants.TEAM;
 import static eu.javaland.ck.TeamConstants.TEAM_CONTROLLER;
@@ -80,9 +81,17 @@ public class TeamsController {
         Database.votes.forEach((k, v) -> {
             final Vote vote = gson.fromJson(v, Vote.class);
             if (isCorrect(vote)) {
-                if (vote.getSpeakerId() == ANDREAS_ID || vote.getSpeakerId() == ED_ID || vote.getSpeakerId() == GEAL_ID) {
+                if(Objects.equals(currentTeam, TeamConstants.BUILD_TOOLS) && vote.getSpeakerId() == ANDRES_ID) {
                     countA.incrementAndGet();
-                } else {
+                } else if(Objects.equals(currentTeam, TeamConstants.BUILD_TOOLS) && vote.getSpeakerId() == GUNNAR_ID) {
+                    countB.incrementAndGet();
+                } else if(Objects.equals(currentTeam, TeamConstants.ENTERPRISE) && vote.getSpeakerId() == ED_ID) {
+                    countA.incrementAndGet();
+                } else if(Objects.equals(currentTeam, TeamConstants.ENTERPRISE) && vote.getSpeakerId() == SIMONS_ID) {
+                    countB.incrementAndGet();
+                } else if(Objects.equals(currentTeam, TeamConstants.IDES) && vote.getSpeakerId() == GEAL_ID) {
+                    countA.incrementAndGet();
+                } else if(Objects.equals(currentTeam, TeamConstants.IDES) && vote.getSpeakerId() == MICHAEL_ID) {
                     countB.incrementAndGet();
                 }
             }

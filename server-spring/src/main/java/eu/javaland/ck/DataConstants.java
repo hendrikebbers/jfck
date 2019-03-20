@@ -4,7 +4,7 @@ public interface DataConstants {
 
     int GUNNAR_ID = 1;
 
-    int ANDREAS_ID = 2;
+    int ANDRES_ID = 2;
 
     int SIMONS_ID = 3;
 
