@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script language="JavaScript">
+        $("#reset-votes").on("submit", function () {
+            $.ajax("/reset", {
+                method: "DELETE"
+            })
+        });
+
+        $("#next-step").on("submit", function () {
+            $.post("/next");
+        });
+
+        $("*[id='question-*']").each(function (index, element) {
+            element.on("click", function () {
+                $.post("/questions/" + element.text())
+            });
+        });
+    </script>
+</head>
+<body>
+<div>
+    <form id="reset-votes">
+        <button type="submit">Reset Votes</button>
+    </form>
+</div>
+<div>
+    <form id="next-step">
+        <button type="submit">Next Step</button>
+    </form>
+</div>
+<div>
+    <button id="question-1">1</button>
+    <button id="question-2">2</button>
+    <button id="question-3">3</button>
+    <button id="question-4">4</button>
+    <button id="question-5">5</button>
+    <button id="question-6">6</button>
+    <button id="question-7">7</button>
+    <button id="question-8">8</button>
+    <button id="question-9">9</button>
+    <button id="question-10">10</button>
+    <button id="question-11">11</button>
+    <button id="question-12">12</button>
+</div>
+</body>
+</html>
